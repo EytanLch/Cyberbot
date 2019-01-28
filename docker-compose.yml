@@ -1,0 +1,126 @@
+version: '3'
+
+services:
+#File to define each container in our cyberbot:
+  #the node.js container for the backend application logic
+  #nginx container for serving front end webapp files
+  #elasticsearch container for storing and searching data
+  api: #Node.js App
+   container_name: cyberbot-api
+   build:
+   ports: 
+      - "3000:3000"
+      - "9229:9229"
+   environment:
+      - NODE_ENV = local
+      - ES_HOST = elasticsearch
+      - PORT = 3000
+   volumes:
+      - ./books: /user/src/app/books
+
+  frontend:
+    container: cyberbot-frontend
+    image: ngingx
+    volumes:
+      - ./public:/usr/share/ngingx/html
+    ports:
+      - "8080:80"
+
+  elasticsearch: #Elasticsearch insrance
+    container_name: cyberbot-search
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    volumes: #persist ES data in separate "esdata" volume
+      -esdata: /usr/share/elasticsearch/data
+    environment: 
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m - XMx512m"
+      - discovery.type = single-node
+    ports: #Export elasticsearch ports
+      - "9300:9300"
+      - "9200:9200"
+
+    volumes: #Define separate volume for Elasticsearch data
+     esdata: 
+
+  #python:
+   # build: ./python3-R/
+    #restart: always
+  }
+#    depends_on:
+#        - apk-cache
+    #ports:
+     # - "5000:5000"
+    #volumes:
+     # - ./var_cache_apk:/var/cache/apk
+      #- ./cache_pip:/root/.cache/pip
+      #- ./python3-R/cve-search/indexdir:/cve-search/indexdir
+#      - ./python3-R/vfeed.io:/vfeed.io
+    #networks:
+     # - cyberbot-network
+    #extra_hosts:
+     # - "dl-4.alpinelinux.org:192.168.99.100"
+      #- "dl-cdn.alpinelinux.org:192.168.99.100"
+      
+#  python2:
+#    build: ./python2-R/
+#    restart: always
+#    ports:
+#      - "5000"
+#    volumes:
+#      - ./var_cache_apk:/var/cache/apk
+#      - ./cache_pip:/root/.cache/pip
+#      - ./python2-R/vfeed.io:/vfeed.io
+#    networks:
+#      - cyberbot-network
+#    extra_hosts:
+#      - "dl-4.alpinelinux.org:192.168.99.100"
+#      - "dl-cdn.alpinelinux.org:192.168.99.100"
+  
+  #mongo:
+    #image: mongo
+    #restart: always
+    #ports:
+     # - 27017:27017
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: example
+    #volumes:
+     # - mongodata:/data/db
+    #networks:
+    #  - cyberbot-network
+#  #  command: mongod --bind_ip_all
+
+  #mongo-express:
+    #image: mongo-express
+    #restart: always
+    #ports:
+     # - 8881:8081
+#    #environment:
+#     # ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#    #  ME_CONFIG_MONGODB_ADMINPASSWORD: example
+    #networks:
+   #   - cyberbot-network
+      
+  #redis:
+   # image: redis:5.0.1-alpine
+   # restart: always
+   # ports:
+      - 6379:6379
+  #  volumes:
+ #     - ./redis_database:/data
+ #  # networks:
+ #   #  - cyberbot-network
+  
+#volumes:
+  #mongodata:
+    #driver: rexray
+    #driver: local
+    #external: true
+   # name: mongodata
+
+#networks:
+ # cyberbot-network:
+  #  driver: bridge
+
+
+ 

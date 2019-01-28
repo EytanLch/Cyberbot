@@ -1,0 +1,6 @@
+#avoid copying unneeded files into container
+
+node_modules/
+npm-dbug.log
+books/
+public/

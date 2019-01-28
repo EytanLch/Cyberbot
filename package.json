@@ -1,0 +1,28 @@
+#node app configuration
+
+
+{
+	"name":"Cyberbot",
+	"version": "1.0.0",
+	"description":"Source code for Cyberbot with Elasticsearch",
+	"scripts": {
+		"start":"node --inspect=0.0.0.0:9229 server/app.js"
+	},
+	"repository": {
+		"type":"git",
+		"url":"git+https://github.com/triestpa/guttenberg-search.git"
+	},
+	"author":"eytan.lellouche@sia-partners.com",
+	"license":"Sia Partners",
+	"bugs":{
+		"url":"https://github.com/triestpa/guttenberg-search/issues"
+	},
+"homepage":"https://github.com/triestpa/guttenberg-search#readme",
+"dependencies":{
+	"elasticsearch":"13.0.1",
+	"joi":"13.0.1",
+	"koa":"2.4.1",
+	"koa-joi-validate":"0.5.1",
+	"koa-router":"7.2.1",
+     }
+}
