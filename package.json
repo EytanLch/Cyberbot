@@ -10,14 +10,14 @@
 	},
 	"repository": {
 		"type":"git",
-		"url":"git+https://github.com/triestpa/guttenberg-search.git"
+		"url":"git+https://github.com/EytanLch/Cyberbot"
 	},
 	"author":"eytan.lellouche@sia-partners.com",
 	"license":"Sia Partners",
 	"bugs":{
-		"url":"https://github.com/triestpa/guttenberg-search/issues"
+		"url":"https://github.com/EytanLch/Cyberbot/issues"
 	},
-"homepage":"https://github.com/triestpa/guttenberg-search#readme",
+"homepage":"https://github.com/EytanLch/Cyberbot#readme",
 "dependencies":{
 	"elasticsearch":"13.0.1",
 	"joi":"13.0.1",
